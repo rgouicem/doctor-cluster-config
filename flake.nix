@@ -5,7 +5,8 @@
   # $ nix flake update --recreate-lock-file
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:Mic92/nixpkgs";
     nur.url = "github:nix-community/NUR";
 
     home-manager.url = "github:rycee/home-manager/release-20.09";

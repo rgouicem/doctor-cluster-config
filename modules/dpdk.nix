@@ -24,22 +24,6 @@ with lib;
       "hugepagesz=${config.boot.hugepages.size}"
       "hugepages=${toString config.boot.hugepages.number}"
     ];
-    boot.extraModulePackages = [
-      # https://github.com/NixOS/nixpkgs/pull/91823
-      (config.boot.kernelPackages.dpdk.overrideAttrs (old: rec {
-        pname = "dpdk";
-        version = "20.05";
-
-        src = pkgs.fetchurl {
-          url = "https://fast.dpdk.org/rel/dpdk-${version}.tar.xz";
-          sha256 = "0h0xv2zwb91b9n29afg5ihn06a8q28in64hag2f112kc19f79jj8";
-        };
-
-        postPatch = ''
-          patchShebangs config/arm buildtools
-        '';
-      })).kmod
-    ];
     boot.kernelModules = [ "igb_uio" ];
 
     # From the output of udevadm info -a -p /sys/bus/pci/devices/0000:03:00.0,

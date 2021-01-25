@@ -33,6 +33,12 @@ let
         nixpkgs.flake = nixpkgs;
         nur.flake = nur;
       };
+
+      nixpkgs.overlays = [
+        (final: prev: {
+          nixpkgs-unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+        })
+      ];
     }
     retiolum.nixosModules.retiolum
   ];
@@ -40,6 +46,7 @@ let
   computeNodeModules = commonModules ++ [
     ./hardware-configuration.nix
     ./modules/tracing.nix
+    ./modules/dax.nix
     ./modules/dpdk.nix
     ./modules/sgx
     ./modules/sgx/graphene.nix
